@@ -23,33 +23,38 @@ export default function Chatbot() {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
 
     const userMsg = input.trim();
-    setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userMsg }]);
+    const newMessages = [...messages, { id: Date.now(), sender: 'user', text: userMsg }];
+    
+    setMessages(newMessages);
     setInput('');
     setIsTyping(true);
 
-    // Mock AI thinking delay
-    setTimeout(() => {
-      let botReply = "That's a great question! I'm a demo bot, but I can do exactly this for your customers—answering FAQs and taking their details while you sleep. Use the form on this page to request your free 48H preview!";
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: newMessages })
+      });
       
-      const lowerInput = userMsg.toLowerCase();
-      if (lowerInput.includes('price') || lowerInput.includes('cost') || lowerInput.includes('pay')) {
-        botReply = "You don't pay anything upfront! Aleksander builds a complete custom preview in exactly 48 hours. If you love the result, we launch it. Simple and risk-free.";
-      } else if (lowerInput.includes('seo') || lowerInput.includes('google') || lowerInput.includes('rank')) {
-        botReply = "Local SEO is our specialty! We optimize your site structure and set up your Google Business Profile so you rank #1 on Google Maps and get more local calls.";
-      } else if (lowerInput.includes('restaurant') || lowerInput.includes('food') || lowerInput.includes('menu')) {
-        botReply = "For restaurants, we integrate direct ordering buttons for Wolt, Foody, and Bolt Food. We also embed interactive Google Maps so diners find you instantly!";
-      } else if (lowerInput.includes('service') || lowerInput.includes('book') || lowerInput.includes('appointment')) {
-        botReply = "For service businesses, we add 1-click WhatsApp buttons and beautiful photo galleries of your work so clients can easily see your quality and book instantly.";
+      const data = await response.json();
+      
+      if (response.ok && data.reply) {
+        setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: data.reply }]);
+      } else {
+        console.error("Chatbot API Error:", data.error);
+        setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: "Sorry, I'm having trouble connecting to my brain right now! Please use the contact form below." }]);
       }
-
-      setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: botReply }]);
+    } catch (error) {
+      console.error("Network Error:", error);
+      setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: "Sorry, I encountered a network error. Please use the contact form to reach Aleksander directly." }]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   return (
