@@ -175,14 +175,13 @@ function Navbar() {
       <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl rounded-full px-4 sm:px-6 py-2.5 transition-all duration-300 ${scrolled ? 'glass shadow-lg border-primary/10' : 'bg-transparent border-transparent'}`}>
         <div className="flex items-center justify-between">
           <a href="#home" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-md">
-              <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                {/* Omega Symbol (Ω) */}
-                <path d="M5 20h3M16 20h3M8 20a7 7 0 1 1 8 0" />
-                {/* 'A' inside */}
-                <path d="M12 8l-2.5 7h5L12 8z" />
-                <path d="M10.5 13h3" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-md relative overflow-hidden">
+              <svg className="absolute inset-0 h-full w-full text-white/90 scale-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                {/* Thick Omega Symbol (Ω) */}
+                <path d="M4 20h4M16 20h4M8 20a7.5 7.5 0 1 1 8 0" />
               </svg>
+              {/* Classic Serif 'A' overlapping the Omega */}
+              <span className="font-serif italic text-white font-black text-[1.1rem] relative z-10 mt-1">A</span>
             </div>
             <span className="font-display font-extrabold text-base tracking-tight text-ink">Aleksander.</span>
           </a>
@@ -443,14 +442,11 @@ function Footer() {
   return (
     <footer className="bg-deep text-white py-12 px-6 sm:px-10 text-center">
       <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-6">
-        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-md">
-          <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            {/* Omega Symbol (Ω) */}
-            <path d="M5 20h3M16 20h3M8 20a7 7 0 1 1 8 0" />
-            {/* 'A' inside */}
-            <path d="M12 8l-2.5 7h5L12 8z" />
-            <path d="M10.5 13h3" />
+        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-md relative overflow-hidden">
+          <svg className="absolute inset-0 h-full w-full text-white/90 scale-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 20h4M16 20h4M8 20a7.5 7.5 0 1 1 8 0" />
           </svg>
+          <span className="font-serif italic text-white font-black text-xl relative z-10 mt-1">A</span>
         </div>
         <p className="text-white/50 text-xs">
           Built with precision by Aleksander. Serving local businesses from Berlin to Ayia Napa.
