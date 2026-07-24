@@ -163,10 +163,10 @@ function CodeBracketsAnim() {
 }
 
 // Custom Cyprus Logo (New PNG Image)
-function CyprusLogo({ className = "h-10 w-10" }) {
+function CyprusLogo({ className = "h-14 sm:h-16 w-auto" }) {
   return (
-    <div className={`${className} flex-shrink-0`}>
-      <img src="/logo.png" alt="Aleksander in Cyprus Logo" className="w-full h-full object-contain" />
+    <div className={`${className} flex-shrink-0 flex items-center`}>
+      <img src="/logo aleksander.png" alt="Aleksander in Cyprus Logo" className="max-w-full max-h-full object-contain drop-shadow-md" />
     </div>
   )
 }
@@ -223,7 +223,7 @@ function Navbar() {
               window.location.hash = NAV_LINKS[idx].href;
               setMobileOpen(false);
             }} 
-            accentColor="#FF6B6B" 
+            accentColor="#18699B" 
             textColor="#0F172A" 
             markerColor="#94A3B8" 
             fontSize={2.5}
