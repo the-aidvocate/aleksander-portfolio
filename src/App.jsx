@@ -21,6 +21,7 @@ import {
 import FloatingLines from './components/FloatingLines'
 import LineSidebar from './components/LineSidebar'
 import GradientText from './components/GradientText'
+import Chatbot from './components/Chatbot'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -507,6 +508,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <Chatbot />
     </div>
   )
 }
