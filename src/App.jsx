@@ -18,13 +18,15 @@ import {
   Check,
   ChevronRight
 } from 'lucide-react'
+import FloatingLines from './components/FloatingLines'
+import LineSidebar from './components/LineSidebar'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
-  { label: 'My Services', href: '#services' },
   { label: 'The 48H Process', href: '#process' },
+  { label: 'My Services', href: '#services' },
   { label: 'Get Free Preview', href: '#contact' },
 ]
 
@@ -121,7 +123,7 @@ function CodeBracketsAnim() {
   const toneText = status.tone === 'emerald' ? 'text-emerald-500' : status.tone === 'accent' ? 'text-accent' : 'text-primary'
 
   return (
-    <div className="relative h-44 w-full rounded-3xl overflow-hidden border border-divider p-5 flex flex-col justify-between bg-surface">
+    <div className="relative h-44 w-full rounded-3xl overflow-hidden border border-divider p-5 flex flex-col justify-between bg-white shadow-sm">
       <div className="flex items-center justify-between z-20">
         <div className="flex items-center gap-2">
           <Code2 className="h-4 w-4 text-primary" />
@@ -159,10 +161,22 @@ function CodeBracketsAnim() {
   )
 }
 
-import FloatingLines from './components/FloatingLines'
-import LineSidebar from './components/LineSidebar'
-
-// --- Component Code follows...
+// Custom Cyprus Logo
+function CyprusLogo({ className = "h-10 w-10" }) {
+  return (
+    <div className={`${className} rounded-full bg-white flex items-center justify-center border-2 border-primary/20 shadow-sm relative overflow-hidden flex-shrink-0`}>
+      {/* Background Sun offset to top right */}
+      <div className="absolute top-[-15%] right-[-15%] w-[60%] h-[60%] bg-primary/15 rounded-full" />
+      <svg className="h-5 w-5 text-primary z-10 relative mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        {/* The 'A' (Villa / Mount Olympos shape) */}
+        <path d="M12 3 L4 21" />
+        <path d="M12 3 L20 21" />
+        {/* Mediterranean Wave crossing through the A */}
+        <path d="M1 15 Q 6 11 12 15 T 23 15" stroke="#0F172A" strokeWidth="1.5" />
+      </svg>
+    </div>
+  )
+}
 
 // 1. Navbar
 function Navbar() {
@@ -177,48 +191,49 @@ function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl rounded-full px-4 sm:px-6 py-2.5 transition-all duration-300 ${scrolled ? 'glass-dark shadow-lg border-white/10' : 'bg-transparent border-transparent'}`}>
+      <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl rounded-full px-4 sm:px-6 py-2.5 transition-all duration-300 ${scrolled ? 'glass shadow-lg border-primary/10' : 'bg-white/50 backdrop-blur-sm border border-transparent'}`}>
         <div className="flex items-center justify-between">
-          <a href="#home" className="flex items-center gap-2">
-            <div className="h-10 w-10 rounded-full bg-deep flex items-center justify-center shadow-md border border-white/10 relative overflow-hidden">
-              <svg className="absolute inset-0 h-full w-full scale-[0.85]" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                {/* Mediterranean Sun/Omega Arch */}
-                <path d="M5 16a7 7 0 1 1 14 0" stroke="#FF6B6B" strokeWidth="2.5" />
-                {/* Ocean Waves Base */}
-                <path d="M2 16h3c1 0 1-1 2-1s1 1 2 1 1-1 2-1 1 1 2 1 1-1 2-1 1 1 2 1h3" stroke="#94A3B8" strokeWidth="2" />
-              </svg>
-              {/* Elegant Serif 'A' overlapping */}
-              <span className="font-serif italic text-white font-black text-lg relative z-10 mb-0.5">A</span>
-            </div>
-            <span className="font-display font-extrabold text-base tracking-tight text-white">Aleksander.</span>
+          <a href="#home" className="flex items-center gap-3">
+            <CyprusLogo />
+            <span className="font-display font-black text-lg tracking-tight text-ink">Aleksander.</span>
           </a>
-          <div className="hidden md:flex items-center gap-6">
-            {NAV_LINKS.map((link) => (
-              <a key={link.label} href={link.href} className="font-body text-xs font-semibold text-white/70 hover:text-primary transition-colors">
-                {link.label}
-              </a>
-            ))}
-          </div>
+          
           <div className="flex items-center gap-3">
             <a href="#contact" className="magnetic-btn hidden sm:inline-flex items-center gap-1 bg-gradient-to-r from-primary to-primary-dark text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all">
               Claim Free Preview <ArrowUpRight className="h-3 w-3" />
             </a>
-            <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-1 text-white">
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {/* The primary Menu button that triggers the LineSidebar overlay */}
+            <button 
+              onClick={() => setMobileOpen(!mobileOpen)} 
+              className="flex items-center gap-2 bg-surface border border-divider hover:border-primary/50 text-ink px-4 py-2 rounded-full font-bold text-xs transition-all shadow-sm"
+            >
+              {mobileOpen ? (
+                <><X className="h-4 w-4" /> Close</>
+              ) : (
+                <><Menu className="h-4 w-4" /> Menu</>
+              )}
             </button>
           </div>
         </div>
       </nav>
-      <div className={`fixed inset-0 z-40 bg-deep/95 backdrop-blur-2xl transition-all duration-500 flex flex-col justify-center items-center ${mobileOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
-        <div className="flex flex-col gap-6 text-center">
-          {NAV_LINKS.map((link) => (
-            <a key={link.label} href={link.href} onClick={() => setMobileOpen(false)} className="font-display text-2xl font-bold text-white hover:text-primary">
-              {link.label}
-            </a>
-          ))}
-          <a href="#contact" onClick={() => setMobileOpen(false)} className="bg-primary text-white font-bold px-6 py-3 rounded-full mt-4">
-            Claim Free Preview
-          </a>
+
+      {/* The LineSidebar Full-Screen Menu Overlay */}
+      <div className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-2xl transition-all duration-500 flex flex-col justify-center pl-8 sm:pl-24 lg:pl-48 ${mobileOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
+        <div className="max-w-2xl w-full">
+          <span className="font-mono text-xs uppercase tracking-widest text-primary font-bold mb-8 block ml-[60px]">Navigation</span>
+          <LineSidebar 
+            items={NAV_LINKS.map(l => l.label)} 
+            onItemClick={(idx) => {
+              window.location.hash = NAV_LINKS[idx].href;
+              setMobileOpen(false);
+            }} 
+            accentColor="#FF6B6B" 
+            textColor="#0F172A" 
+            markerColor="#94A3B8" 
+            fontSize={2.5}
+            itemGap={32}
+            markerLength={40}
+          />
         </div>
       </div>
     </>
@@ -238,37 +253,37 @@ function Hero() {
   }, [])
 
   return (
-    <section id="home" ref={ref} className="relative min-h-[100dvh] overflow-hidden flex flex-col justify-center bg-deep pt-20">
+    <section id="home" ref={ref} className="relative min-h-[100dvh] overflow-hidden flex flex-col justify-center bg-white pt-20">
       
-      {/* FloatingLines Background Integration */}
-      <div className="absolute inset-0 z-0 opacity-80 pointer-events-none">
+      {/* FloatingLines on Bright Background */}
+      <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none mix-blend-multiply">
         <FloatingLines 
-          linesGradient={['#FF6B6B', '#FF8A8A', '#475569', '#E2E8F0']}
+          linesGradient={['#FF6B6B', '#FF8A8A', '#E55A5A', '#94A3B8']}
           bendRadius={5.0}
-          lineCount={[12, 10, 8]}
+          lineCount={[10, 8, 12]}
           interactive={false}
           parallax={true}
-          mixBlendMode="screen"
+          mixBlendMode="multiply"
         />
       </div>
 
-      <div className="absolute top-1/4 right-0 w-[40%] h-[40%] bg-gradient-to-br from-primary/10 to-accent/5 rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute top-1/4 right-0 w-[40%] h-[40%] bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-[100px] pointer-events-none z-0" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col lg:flex-row items-center justify-between gap-12 mt-12">
         <div className="flex-1 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1.5 rounded-full mb-6 mx-auto lg:mx-0">
+          <div className="inline-flex items-center gap-2 bg-surface border border-divider px-3 py-1.5 rounded-full mb-6 mx-auto lg:mx-0 shadow-sm">
              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-             <span className="font-mono text-[9px] uppercase tracking-widest text-white/90 font-bold">Accepting Local Clients</span>
+             <span className="font-mono text-[9px] uppercase tracking-widest text-ink font-bold">Accepting Local Clients</span>
           </div>
-          <h1 className="font-display text-5xl sm:text-7xl font-black text-white tracking-tighter leading-[0.95] max-w-2xl mx-auto lg:mx-0 drop-shadow-lg">
+          <h1 className="font-display text-5xl sm:text-7xl font-black text-ink tracking-tighter leading-[0.95] max-w-2xl mx-auto lg:mx-0">
             <span className="hero-line-1 block">Stop Losing To</span>
-            <span className="hero-line-2 block font-serif italic gradient-text pb-2 drop-shadow-md">Your Competitors.</span>
+            <span className="hero-line-2 block font-serif italic gradient-text pb-2">Your Competitors.</span>
           </h1>
-          <p className="hero-meta mt-6 text-white/70 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 drop-shadow">
+          <p className="hero-meta mt-6 text-muted text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
             I'm Aleksander. I build clean, modern, SEO-optimized websites that actually bring customers to your local business. Full preview delivered in exactly 48 hours.
           </p>
           <div className="hero-cta mt-8 flex flex-wrap justify-center lg:justify-start gap-4">
-            <a href="#contact" className="magnetic-btn bg-primary text-white px-8 py-3.5 rounded-full font-bold shadow-xl shadow-primary/20 text-sm">
+            <a href="#contact" className="magnetic-btn bg-primary text-white px-8 py-3.5 rounded-full font-bold shadow-lg shadow-primary/20 text-sm">
               Get Your Free Preview <ArrowRight className="inline h-4 w-4 ml-1" />
             </a>
           </div>
@@ -276,14 +291,14 @@ function Hero() {
 
         {/* Photography / Profile Image Area */}
         <div className="hero-cta flex-1 relative max-w-xl w-full mx-auto lg:mx-0">
-           <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-4xl blur-3xl opacity-50" />
+           <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-4xl blur-2xl opacity-70" />
            <img 
              src="/487338549_2350466445322777_2085066943873777275_n.jpg" 
              alt="Aleksander in Ayia Napa" 
-             className="relative z-10 w-full aspect-video object-cover object-right rounded-4xl border-4 border-white/10 shadow-2xl"
+             className="relative z-10 w-full aspect-video object-cover object-right rounded-4xl border-4 border-white shadow-2xl"
            />
            {/* Floating trust badge */}
-           <div className="absolute -bottom-6 lg:bottom-4 left-4 lg:-left-8 z-20 bg-white/95 backdrop-blur-sm p-3 rounded-2xl shadow-xl flex items-center gap-3">
+           <div className="absolute -bottom-6 lg:bottom-4 left-4 lg:-left-8 z-20 bg-white p-3 rounded-2xl shadow-xl flex items-center gap-3 border border-divider">
               <div className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center">
                  <MapPin className="h-5 w-5 text-primary" />
               </div>
@@ -301,25 +316,25 @@ function Hero() {
 // 3. Pillars
 function Pillars() {
   return (
-    <section className="relative py-16 border-y border-divider bg-white">
+    <section className="relative py-16 border-y border-divider bg-surface">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-divider gap-8 md:gap-0 text-center md:text-left">
         <div className="md:px-8 py-4">
           <div className="font-display font-black text-4xl text-ink mb-1 flex justify-center md:justify-start items-baseline">
             <CountUp target={48} /> <span className="text-primary ml-1">Hours</span>
           </div>
-          <p className="text-xs text-muted font-mono uppercase tracking-widest">To First Preview</p>
+          <p className="text-xs text-muted font-mono uppercase tracking-widest font-bold">To First Preview</p>
         </div>
         <div className="md:px-8 py-4">
           <div className="font-display font-black text-4xl text-ink mb-1 flex justify-center md:justify-start items-baseline">
             <CountUp target={100} /> <span className="text-primary ml-1">%</span>
           </div>
-          <p className="text-xs text-muted font-mono uppercase tracking-widest">Risk-Free Guarantee</p>
+          <p className="text-xs text-muted font-mono uppercase tracking-widest font-bold">Risk-Free Guarantee</p>
         </div>
         <div className="md:px-8 py-4">
           <div className="font-display font-black text-4xl text-ink mb-1 flex justify-center md:justify-start items-baseline">
             <CountUp target={1} /> <span className="text-primary ml-1">Focus</span>
           </div>
-          <p className="text-xs text-muted font-mono uppercase tracking-widest">Getting You Customers</p>
+          <p className="text-xs text-muted font-mono uppercase tracking-widest font-bold">Getting You Customers</p>
         </div>
       </div>
     </section>
@@ -350,13 +365,13 @@ function Process() {
   ]
 
   return (
-    <section id="process" ref={containerRef} className="py-24 px-6 sm:px-10 bg-surface">
+    <section id="process" ref={containerRef} className="py-24 px-6 sm:px-10 bg-white border-b border-divider">
       <div className="max-w-4xl mx-auto mb-16 text-center">
         <span className="font-mono text-xs uppercase tracking-widest text-primary font-bold">The 48H Process</span>
-        <h2 className="font-display font-black text-4xl sm:text-5xl mt-3 mb-10">Simple. Fast. Risk-Free.</h2>
+        <h2 className="font-display font-black text-4xl sm:text-5xl mt-3 mb-10 text-ink">Simple. Fast. Risk-Free.</h2>
         
         {/* Designer Vibe Hero Image */}
-        <div className="relative rounded-4xl overflow-hidden shadow-2xl mb-16 h-64 sm:h-96 w-full max-w-3xl mx-auto border-4 border-white">
+        <div className="relative rounded-4xl overflow-hidden shadow-xl mb-16 h-64 sm:h-96 w-full max-w-3xl mx-auto border-4 border-white">
             <img 
               src="/56158201_802646646771439_3733814644658143232_n (1).jpg" 
               alt="Aleksander Designer Space" 
@@ -366,7 +381,7 @@ function Process() {
       </div>
       <div className="space-y-12 max-w-4xl mx-auto">
         {steps.map((step, i) => (
-          <article key={i} className="process-card sticky top-24 bg-white border border-divider rounded-4xl p-8 sm:p-12 shadow-xl shadow-slate-200/50 flex flex-col md:flex-row gap-8 items-center">
+          <article key={i} className="process-card sticky top-24 bg-surface border border-divider rounded-4xl p-8 sm:p-12 shadow-xl shadow-slate-200/50 flex flex-col md:flex-row gap-8 items-center">
             <div className="font-display font-black text-[6rem] text-primary/10 leading-none">{step.num}</div>
             <div>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-ink mb-3">{step.title}</h3>
@@ -379,60 +394,32 @@ function Process() {
   )
 }
 
-// 5. Interactive Services (using LineSidebar)
-function ServicesSection() {
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  const activeService = SERVICES[activeIndex]
-  const Icon = activeService?.icon || Search
-
+// 5. Services Grid (Bright Theme)
+function ServicesGrid() {
   return (
-    <section id="services" className="bg-white py-24 sm:py-32 px-6 sm:px-10">
+    <section id="services" className="bg-surface py-24 px-6 sm:px-10 border-b border-divider">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 text-center max-w-2xl mx-auto">
           <span className="font-mono text-xs uppercase tracking-widest text-primary font-bold">What I Do</span>
           <h2 className="font-display font-black text-4xl sm:text-5xl text-ink mt-3">Everything you need to dominate locally.</h2>
         </div>
-        
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center lg:items-start max-w-5xl mx-auto">
-          {/* Left Side: Animated Sidebar */}
-          <div className="w-full lg:w-1/2">
-             <LineSidebar 
-               items={SERVICES.map(s => s.title)} 
-               defaultActive={0} 
-               onItemClick={setActiveIndex} 
-               accentColor="#FF6B6B" 
-               textColor="#64748B" 
-               markerColor="#E2E8F0" 
-               fontSize={1.25}
-               itemGap={24}
-             />
-          </div>
-
-          {/* Right Side: Active Service Display */}
-          <div className="w-full lg:w-1/2 relative min-h-[300px] flex items-center">
-             <div className="absolute inset-0 bg-gradient-to-br from-surface to-white border border-divider rounded-4xl p-10 sm:p-14 shadow-xl shadow-slate-200/50 transition-all duration-500 ease-in-out">
-                <div 
-                  key={activeIndex} 
-                  className="animate-[text-fadein_0.4s_ease-out_forwards]"
-                  style={{ animationName: 'text-fadein' }}
-                >
-                  <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                    <Icon className="h-7 w-7 text-primary" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {SERVICES.map((svc, i) => {
+            const Icon = svc.icon
+            return (
+              <div key={i} className="bg-white p-8 rounded-3xl border border-divider shadow-sm hover:shadow-md hover:border-primary/20 transition-all group min-h-[260px] flex flex-col justify-between">
+                <div>
+                  <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Icon className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-display font-bold text-3xl text-ink mb-4">{activeService.title}</h3>
-                  <p className="text-muted text-lg leading-relaxed">{activeService.text}</p>
+                  <h3 className="font-display font-bold text-xl text-ink mb-3">{svc.title}</h3>
+                  <p className="text-muted text-sm leading-relaxed">{svc.text}</p>
                 </div>
-             </div>
-          </div>
+              </div>
+            )
+          })}
         </div>
       </div>
-      <style>{`
-        @keyframes text-fadein {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </section>
   )
 }
@@ -454,29 +441,29 @@ function Contact() {
           <h2 className="font-display font-black text-4xl sm:text-5xl text-ink leading-tight mb-4">
             Let's build your <br/><span className="font-serif italic text-primary">digital storefront.</span>
           </h2>
-          <p className="text-muted mb-8 leading-relaxed">
+          <p className="text-muted mb-8 leading-relaxed max-w-md">
             Local businesses lose money every day because their website is outdated or invisible. Send me your details, and I will build you a free custom preview in 48 hours. You only pay if you decide to go live.
           </p>
           <CodeBracketsAnim />
         </div>
         
-        <div className="bg-surface border border-divider rounded-4xl p-8 shadow-sm">
+        <div className="bg-surface border border-divider rounded-4xl p-8 sm:p-10 shadow-lg shadow-slate-200/50">
           {status === 'sent' ? (
              <div className="text-center py-12">
                <CheckCircle2 className="h-12 w-12 text-emerald-500 mx-auto mb-4" />
-               <h3 className="font-display font-bold text-2xl mb-2">Request Received!</h3>
+               <h3 className="font-display font-bold text-2xl mb-2 text-ink">Request Received!</h3>
                <p className="text-muted">I'll review your details and reach out shortly to begin your 48-hour build.</p>
              </div>
           ) : (
             <form onSubmit={onSubmit} className="space-y-4">
-              <h3 className="font-display font-bold text-xl mb-4">Request Free Preview</h3>
-              <input required type="text" placeholder="Your Name" className="w-full bg-white border border-divider rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary" />
-              <input required type="email" placeholder="Email Address" className="w-full bg-white border border-divider rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary" />
-              <input required type="text" placeholder="Business Name / Industry" className="w-full bg-white border border-divider rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary" />
-              <button type="submit" disabled={status==='sending'} className="w-full bg-primary text-white font-bold py-3.5 rounded-xl shadow-md hover:bg-primary-dark transition-colors">
+              <h3 className="font-display font-bold text-xl mb-4 text-ink">Request Free Preview</h3>
+              <input required type="text" placeholder="Your Name" className="w-full bg-white border border-divider rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary text-ink" />
+              <input required type="email" placeholder="Email Address" className="w-full bg-white border border-divider rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary text-ink" />
+              <input required type="text" placeholder="Business Name / Industry" className="w-full bg-white border border-divider rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary text-ink" />
+              <button type="submit" disabled={status==='sending'} className="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-md hover:bg-primary-dark transition-colors">
                 {status === 'sending' ? 'Sending...' : 'Start My 48H Build'}
               </button>
-              <p className="text-[10px] text-muted text-center mt-2 uppercase tracking-widest">100% Risk Free • No Credit Card Required</p>
+              <p className="text-[10px] text-muted text-center mt-2 uppercase tracking-widest font-bold">100% Risk Free • No Credit Card Required</p>
             </form>
           )}
         </div>
@@ -488,18 +475,10 @@ function Contact() {
 // 7. Footer
 function Footer() {
   return (
-    <footer className="bg-deep text-white py-12 px-6 sm:px-10 text-center">
+    <footer className="bg-deep text-white py-16 px-6 sm:px-10 text-center">
       <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-6">
-        <div className="h-12 w-12 rounded-full bg-deep flex items-center justify-center shadow-md border border-white/10 relative overflow-hidden">
-          <svg className="absolute inset-0 h-full w-full scale-[0.85]" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            {/* Mediterranean Sun/Omega Arch */}
-            <path d="M5 16a7 7 0 1 1 14 0" stroke="#FF6B6B" strokeWidth="2.5" />
-            {/* Ocean Waves Base */}
-            <path d="M2 16h3c1 0 1-1 2-1s1 1 2 1 1-1 2-1 1 1 2 1 1-1 2-1 1 1 2 1h3" stroke="#94A3B8" strokeWidth="2" />
-          </svg>
-          <span className="font-serif italic text-white font-black text-xl relative z-10 mb-0.5">A</span>
-        </div>
-        <p className="text-white/50 text-xs">
+        <CyprusLogo className="h-12 w-12" />
+        <p className="text-white/50 text-xs mt-2">
           Built with precision by Aleksander. Serving local businesses from Berlin to Ayia Napa.
         </p>
         <p className="text-white/30 text-[10px]">© {new Date().getFullYear()} Aleksander Web Design. All rights reserved.</p>
@@ -522,7 +501,7 @@ export default function App() {
         <Hero />
         <Pillars />
         <Process />
-        <ServicesSection />
+        <ServicesGrid />
         <Contact />
       </main>
       <Footer />
