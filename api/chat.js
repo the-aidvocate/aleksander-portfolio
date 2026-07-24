@@ -44,7 +44,14 @@ export default async function handler(req, res) {
     });
 
     // Format the conversation history for Gemini's API
-    const formattedHistory = messages.slice(0, -1).map(msg => ({
+    // Gemini strictly requires the history to start with a 'user' role.
+    // We must filter out the initial greeting from the 'bot' if it's the very first message.
+    let validMessages = messages.slice(0, -1);
+    if (validMessages.length > 0 && validMessages[0].sender === 'bot') {
+      validMessages = validMessages.slice(1);
+    }
+
+    const formattedHistory = validMessages.map(msg => ({
       role: msg.sender === 'bot' ? 'model' : 'user',
       parts: [{ text: msg.text }]
     }));
@@ -59,9 +66,22 @@ export default async function handler(req, res) {
     return res.status(200).json({ reply: responseText });
   } catch (error) {
     console.error("Gemini API Error Object:", error);
+    
+    // Attempt to stringify the entire error object if possible, otherwise use message
+    let errorMessage = "Unknown Error";
+    if (error instanceof Error) {
+        errorMessage = error.message;
+        if (error.status) errorMessage += ` (Status: ${error.status})`;
+    } else if (typeof error === 'object') {
+        errorMessage = JSON.stringify(error, Object.getOwnPropertyNames(error));
+    } else {
+        errorMessage = String(error);
+    }
+
     return res.status(500).json({ 
       error: 'Failed to generate response', 
-      details: error.message || error.toString() 
+      details: errorMessage,
+      stack: error.stack || null
     });
   }
 }
