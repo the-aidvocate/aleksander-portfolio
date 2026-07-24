@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#18699B',        // Deep Mediterranean Blue
-        'primary-dark': '#114A6E',   // Darker Blue
-        'primary-light': '#5BB5D9', // Light Aqua Blue
-        accent: '#D4B872',          // Sand / Gold
-        'accent-dark': '#B89C5A',   // Darker Sand
+        primary: '#148DDC',        // Azure Blue
+        'primary-dark': '#0E6BA8',   // Darker Azure
+        'primary-light': '#37B5F5', // Light Azure
+        accent: '#08D8A2',          // Turquoise
+        'accent-dark': '#06A87D',   // Darker Turquoise
         background: '#FFFFFF',      // Clean White
         surface: '#F8FAFC',         // Premium slate-50 (warm/clean)
         ink: '#0F172A',             // Slate-900 (almost black)

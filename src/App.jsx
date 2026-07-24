@@ -223,7 +223,7 @@ function Navbar() {
               window.location.hash = NAV_LINKS[idx].href;
               setMobileOpen(false);
             }} 
-            accentColor="#18699B" 
+            accentColor="#148DDC" 
             textColor="#0F172A" 
             markerColor="#94A3B8" 
             fontSize={2.5}
@@ -254,7 +254,7 @@ function Hero() {
       {/* FloatingLines on Bright Background */}
       <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none mix-blend-multiply">
         <FloatingLines 
-          linesGradient={['#18699B', '#5BB5D9', '#D4B872', '#B89C5A']}
+          linesGradient={['#148DDC', '#37B5F5', '#08D8A2', '#0E6BA8']}
           bendRadius={5.0}
           lineCount={[10, 8, 12]}
           interactive={false}
@@ -274,7 +274,7 @@ function Hero() {
           <h1 className="font-display text-5xl sm:text-7xl font-black text-ink tracking-tighter leading-[0.95] max-w-2xl mx-auto lg:mx-0">
             <span className="hero-line-1 block mb-2">Stop Losing To</span>
             <GradientText 
-              colors={["#18699B", "#5BB5D9", "#D4B872"]} 
+              colors={["#148DDC", "#08D8A2", "#37B5F5"]} 
               animationSpeed={4} 
               className="hero-line-2 font-serif italic pb-2 text-5xl sm:text-7xl mx-auto lg:mx-0"
             >
