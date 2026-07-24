@@ -176,7 +176,13 @@ function Navbar() {
         <div className="flex items-center justify-between">
           <a href="#home" className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-md">
-              <span className="font-serif italic text-white font-bold text-lg">A</span>
+              <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                {/* Omega Symbol (Ω) */}
+                <path d="M5 20h3M16 20h3M8 20a7 7 0 1 1 8 0" />
+                {/* 'A' inside */}
+                <path d="M12 8l-2.5 7h5L12 8z" />
+                <path d="M10.5 13h3" />
+              </svg>
             </div>
             <span className="font-display font-extrabold text-base tracking-tight text-ink">Aleksander.</span>
           </a>
@@ -438,7 +444,13 @@ function Footer() {
     <footer className="bg-deep text-white py-12 px-6 sm:px-10 text-center">
       <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-6">
         <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-md">
-          <span className="font-serif italic text-white font-bold text-xl">A</span>
+          <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            {/* Omega Symbol (Ω) */}
+            <path d="M5 20h3M16 20h3M8 20a7 7 0 1 1 8 0" />
+            {/* 'A' inside */}
+            <path d="M12 8l-2.5 7h5L12 8z" />
+            <path d="M10.5 13h3" />
+          </svg>
         </div>
         <p className="text-white/50 text-xs">
           Built with precision by Aleksander. Serving local businesses from Berlin to Ayia Napa.
