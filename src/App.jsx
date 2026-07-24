@@ -20,6 +20,7 @@ import {
 } from 'lucide-react'
 import FloatingLines from './components/FloatingLines'
 import LineSidebar from './components/LineSidebar'
+import GradientText from './components/GradientText'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -161,19 +162,11 @@ function CodeBracketsAnim() {
   )
 }
 
-// Custom Cyprus Logo
+// Custom Cyprus Logo (New PNG Image)
 function CyprusLogo({ className = "h-10 w-10" }) {
   return (
-    <div className={`${className} rounded-full bg-white flex items-center justify-center border-2 border-primary/20 shadow-sm relative overflow-hidden flex-shrink-0`}>
-      {/* Background Sun offset to top right */}
-      <div className="absolute top-[-15%] right-[-15%] w-[60%] h-[60%] bg-primary/15 rounded-full" />
-      <svg className="h-5 w-5 text-primary z-10 relative mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-        {/* The 'A' (Villa / Mount Olympos shape) */}
-        <path d="M12 3 L4 21" />
-        <path d="M12 3 L20 21" />
-        {/* Mediterranean Wave crossing through the A */}
-        <path d="M1 15 Q 6 11 12 15 T 23 15" stroke="#0F172A" strokeWidth="1.5" />
-      </svg>
+    <div className={`${className} flex-shrink-0`}>
+      <img src="/logo.png" alt="Aleksander in Cyprus Logo" className="w-full h-full object-contain" />
     </div>
   )
 }
@@ -195,7 +188,10 @@ function Navbar() {
         <div className="flex items-center justify-between">
           <a href="#home" className="flex items-center gap-3">
             <CyprusLogo />
-            <span className="font-display font-black text-lg tracking-tight text-ink">Aleksander.</span>
+            <div className="flex flex-col sm:flex-row sm:items-baseline gap-1">
+              <span className="font-display font-black text-lg tracking-tight text-ink">Aleksander</span>
+              <span className="font-handwritten text-xl text-primary -mt-1 sm:mt-0">in Cyprus</span>
+            </div>
           </a>
           
           <div className="flex items-center gap-3">
@@ -258,7 +254,7 @@ function Hero() {
       {/* FloatingLines on Bright Background */}
       <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none mix-blend-multiply">
         <FloatingLines 
-          linesGradient={['#FF6B6B', '#FF8A8A', '#E55A5A', '#94A3B8']}
+          linesGradient={['#18699B', '#5BB5D9', '#D4B872', '#B89C5A']}
           bendRadius={5.0}
           lineCount={[10, 8, 12]}
           interactive={false}
@@ -276,8 +272,14 @@ function Hero() {
              <span className="font-mono text-[9px] uppercase tracking-widest text-ink font-bold">Accepting Local Clients</span>
           </div>
           <h1 className="font-display text-5xl sm:text-7xl font-black text-ink tracking-tighter leading-[0.95] max-w-2xl mx-auto lg:mx-0">
-            <span className="hero-line-1 block">Stop Losing To</span>
-            <span className="hero-line-2 block font-serif italic gradient-text pb-2">Your Competitors.</span>
+            <span className="hero-line-1 block mb-2">Stop Losing To</span>
+            <GradientText 
+              colors={["#18699B", "#5BB5D9", "#D4B872"]} 
+              animationSpeed={4} 
+              className="hero-line-2 font-serif italic pb-2 text-5xl sm:text-7xl mx-auto lg:mx-0"
+            >
+              Your Competitors.
+            </GradientText>
           </h1>
           <p className="hero-meta mt-6 text-muted text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
             I'm Aleksander. I build clean, modern, SEO-optimized websites that actually bring customers to your local business. Full preview delivered in exactly 48 hours.

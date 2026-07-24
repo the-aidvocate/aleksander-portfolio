@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#FF6B6B',        // Vibrant Coral
-        'primary-dark': '#E55A5A',   // Darker Coral
-        'primary-light': '#FF8A8A', // Lighter Coral
-        accent: '#475569',          // Slate-600
-        'accent-dark': '#334155',   // Slate-700
+        primary: '#18699B',        // Deep Mediterranean Blue
+        'primary-dark': '#114A6E',   // Darker Blue
+        'primary-light': '#5BB5D9', // Light Aqua Blue
+        accent: '#D4B872',          // Sand / Gold
+        'accent-dark': '#B89C5A',   // Darker Sand
         background: '#FFFFFF',      // Clean White
         surface: '#F8FAFC',         // Premium slate-50 (warm/clean)
         ink: '#0F172A',             // Slate-900 (almost black)
@@ -21,6 +21,7 @@ export default {
         serif: ['"Cormorant Garamond"', 'serif'],
         body: ['"Inter"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
+        handwritten: ['"Caveat"', 'cursive'],
       },
       borderRadius: {
         '2.5xl': '1.25rem',
