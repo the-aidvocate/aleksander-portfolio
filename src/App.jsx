@@ -35,29 +35,29 @@ const SERVICES = [
     text: 'Modern, fully responsive websites that look perfect on mobile devices, tablets, and massive desktop screens.',
   },
   {
+    icon: CheckCircle2,
+    title: 'Restaurant Integrations',
+    text: 'Direct ordering buttons for Wolt, Foody, and Bolt Food. Embedded Google Maps so diners find your location instantly.',
+  },
+  {
+    icon: Phone,
+    title: 'Service Businesses',
+    text: '1-click WhatsApp buttons connecting directly to your number. Beautiful custom photo galleries showcasing your real work.',
+  },
+  {
+    icon: Zap,
+    title: 'AI Chatbot Setup',
+    text: 'A smart 24/7 chatbot on your site to answer customer FAQs instantly and capture new client leads while you sleep.',
+  },
+  {
     icon: Search,
     title: 'Local SEO Optimization',
     text: 'I configure your site structure so Google actually finds you. Outrank your local competitors and capture search traffic.',
   },
   {
-    icon: Zap,
-    title: '48-Hour Delivery',
-    text: 'Stop waiting months for agencies. I build and present a fully working, clean preview of your site in exactly 48 hours.',
-  },
-  {
-    icon: Code2,
-    title: 'Clean Architecture',
-    text: 'Zero bloated templates. I build clean, fast-loading code that converts visitors into paying customers seamlessly.',
-  },
-  {
     icon: Globe,
     title: 'Google Business Setup',
     text: 'I can integrate your new website directly with a Google Business Profile to dominate your local map search results.',
-  },
-  {
-    icon: CheckCircle2,
-    title: 'Risk-Free Preview',
-    text: 'You don\'t pay until you love it. I build the initial layout upfront. If it doesn\'t fit your vision, you walk away free.',
   },
 ]
 
@@ -250,15 +250,15 @@ function Hero() {
         </div>
 
         {/* Photography / Profile Image Area */}
-        <div className="hero-cta flex-1 relative max-w-md w-full">
+        <div className="hero-cta flex-1 relative max-w-xl w-full mx-auto lg:mx-0">
            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-4xl blur-2xl" />
            <img 
              src="/487338549_2350466445322777_2085066943873777275_n.jpg" 
              alt="Aleksander in Ayia Napa" 
-             className="relative z-10 w-full aspect-[4/5] object-cover object-top rounded-4xl border-4 border-white shadow-2xl"
+             className="relative z-10 w-full aspect-video object-cover object-right rounded-4xl border-4 border-white shadow-2xl"
            />
            {/* Floating trust badge */}
-           <div className="absolute bottom-6 -left-6 z-20 bg-white p-3 rounded-2xl shadow-xl flex items-center gap-3">
+           <div className="absolute -bottom-6 lg:bottom-4 left-4 lg:-left-8 z-20 bg-white p-3 rounded-2xl shadow-xl flex items-center gap-3">
               <div className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center">
                  <MapPin className="h-5 w-5 text-primary" />
               </div>
