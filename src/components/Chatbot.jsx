@@ -46,8 +46,9 @@ export default function Chatbot() {
       if (response.ok && data.reply) {
         setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: data.reply }]);
       } else {
-        console.error("Chatbot API Error:", data.error);
-        setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: "Sorry, I'm having trouble connecting to my brain right now! Please use the contact form below." }]);
+        console.error("Chatbot Backend Failure Details:", data.details);
+        console.error("Chatbot Backend Stack Trace:", data.stack);
+        setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: "Sorry, my brain is offline right now! Please use the contact form below." }]);
       }
     } catch (error) {
       console.error("Network Error:", error);
