@@ -250,7 +250,7 @@ function Hero() {
   }, [])
 
   return (
-    <section id="home" ref={ref} className="relative min-h-[100dvh] overflow-hidden flex flex-col justify-center bg-white pt-20">
+    <section id="home" ref={ref} className="relative min-h-[100dvh] overflow-hidden flex flex-col justify-center bg-white pt-20 pb-16 lg:pb-0">
       
       {/* FloatingLines on Bright Background */}
       <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none mix-blend-multiply">
@@ -293,12 +293,12 @@ function Hero() {
         </div>
 
         {/* Photography / Profile Image Area */}
-        <div className="hero-cta flex-1 relative max-w-xl w-full mx-auto lg:mx-0">
+        <div className="hero-cta flex-1 relative max-w-xl w-full mx-auto lg:mx-0 mb-10 lg:mb-0">
            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-4xl blur-2xl opacity-70" />
            <img 
              src="/487338549_2350466445322777_2085066943873777275_n.jpg" 
              alt="Aleksander in Ayia Napa" 
-             className="relative z-10 w-full aspect-video object-cover object-right rounded-4xl border-4 border-white shadow-2xl"
+             className="relative z-10 w-full aspect-square sm:aspect-video object-cover object-center sm:object-right rounded-4xl border-4 border-white shadow-2xl"
            />
            {/* Floating trust badge */}
            <div className="absolute -bottom-6 lg:bottom-4 left-4 lg:-left-8 z-20 bg-white p-3 rounded-2xl shadow-xl flex items-center gap-3 border border-divider">
@@ -462,6 +462,7 @@ function Contact() {
               <h3 className="font-display font-bold text-xl mb-4 text-ink">Request Free Preview</h3>
               <input required type="text" placeholder="Your Name" className="w-full bg-white border border-divider rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary text-ink" />
               <input required type="email" placeholder="Email Address" className="w-full bg-white border border-divider rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary text-ink" />
+              <input required type="tel" placeholder="Phone Number" className="w-full bg-white border border-divider rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary text-ink" />
               <input required type="text" placeholder="Business Name / Industry" className="w-full bg-white border border-divider rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-primary text-ink" />
               <button type="submit" disabled={status==='sending'} className="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-md hover:bg-primary-dark transition-colors">
                 {status === 'sending' ? 'Sending...' : 'Start My 48H Build'}
