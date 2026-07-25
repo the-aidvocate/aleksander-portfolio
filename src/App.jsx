@@ -298,7 +298,7 @@ function Hero() {
            <img 
              src="/487338549_2350466445322777_2085066943873777275_n.jpg" 
              alt="Aleksander in Ayia Napa" 
-             className="relative z-10 w-full aspect-square sm:aspect-video object-cover object-center sm:object-right rounded-4xl border-4 border-white shadow-2xl"
+             className="relative z-10 w-full aspect-[4/3] sm:aspect-video object-cover object-right rounded-4xl border-4 border-white shadow-2xl"
            />
            {/* Floating trust badge */}
            <div className="absolute -bottom-6 lg:bottom-4 left-4 lg:-left-8 z-20 bg-white p-3 rounded-2xl shadow-xl flex items-center gap-3 border border-divider">
